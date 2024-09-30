@@ -1,10 +1,18 @@
-//import 'dart:math';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'second.dart';
 
 void main() {
+  HttpOverrides.global = MyHttpOverrides(); // only valid in development because of https self-signed certificate
   runApp(const MyApp());
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -58,6 +66,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  /*
   int _counter = 0;
 
   void _incrementCounter() {
@@ -70,7 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
-
+  */
+  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done

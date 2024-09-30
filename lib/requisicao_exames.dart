@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:flutter_resenha/model/Album.dart';
+import 'package:flutter_resenha/components/my_dialog.dart';
+
+import 'components/my_network_manaher.dart';
 
 Future<Album> fetchAlbum() async {
   final response = await http
@@ -32,7 +35,11 @@ valor para pesquisar no G2: 2024001928002702372700062046654
 valor para pesquisar no treina: 2023001928000022003740062006941
 */
 
-  final uri = Uri.parse('https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1/buscaRequisicaoExame');
+
+  //const baseUrl = "https://10.5.66.23:9443/gedave/api/spservicos/v1";
+  //const baseUrl = "https://treinagedave.defesaagropecuaria.sp.gov.br/gedave/api/spservicos/v1";
+  const baseUrl = "https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1";
+  final uri = Uri.parse( '$baseUrl/buscaRequisicaoExame');
   final headers = {'Content-Type': 'application/json'};
   //Map<String, dynamic> body = {'codigoBarra': "2024001928002702372700062046654"};
   Map<String, dynamic> body = {'codigoBarra': inputText};
@@ -80,7 +87,7 @@ class RequisicaoExamesWidget extends StatefulWidget {
 
 
 class _MyWidgetState extends State<RequisicaoExamesWidget> {
-  late Future<Album> futureAlbum;
+  //late Future<Album> futureAlbum;
   late TextEditingController controller;
   String text = '';
 
@@ -89,7 +96,7 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
     super.initState();
     debugPrint("class: $widget");
     controller = TextEditingController();
-    futureAlbum = fetchAlbum();
+    //futureAlbum = fetchAlbum();
     //makePostRequest();
   }
 
@@ -119,7 +126,7 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
             ),
                         
             const SizedBox(height: 20),
-            
+            /*
             FutureBuilder<Album>(
               future: futureAlbum,
               builder: (context, snapshot) {
@@ -134,6 +141,7 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
                 return const CircularProgressIndicator();
               },
             ),
+            */
 
             const SizedBox(height: 20),
             
@@ -146,12 +154,14 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
                     )
                   )
                 ),
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     text = controller.text;                    
                   });
                   debugPrint("consultar: $text");
-                  makePostRequestGedavePesquisaRequisicaoExame(text);
+                  //makePostRequestGedavePesquisaRequisicaoExame(text);
+                  readRequisicaoExame();
+                  showAlertDialog1(context, "oi");
                 },
               child: const MyConsultarText(),              
             ),
@@ -169,31 +179,35 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
 
 }
 
-class DialogExample extends StatelessWidget {
-  const DialogExample({super.key});
+Future<void> readRequisicaoExame() async {
+  final networkManager = NetworkManager(
+    defaultHeaders: {
+      //'Content-Type': 'application/json',
+      //'Authorization': 'Bearer your_token_here',
+    },
+  );
 
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const Text('AlertDialog description'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      ),
-      child: const Text('Show Dialog'),
+  try {
+    final response = await networkManager.put(
+      '/buscaRequisicaoExame', 
+      body: {
+        'codigoBarra': '2024001928002702372700062046654',
+      },
     );
+
+    // Handle the response data here
+    debugPrint('response updated successfully: $response');
+    // If the response contains some specific data (e.g. updated user info), you can access it:
+    /*
+    String updatedName = response['name'];
+    String updatedEmail = response['email'];
+
+    print('Updated name: $updatedName');
+    print('Updated email: $updatedEmail');
+    */
+  } catch (e) {
+    // Handle errors
+    debugPrint('Failed to handle request: $e');
   }
 }
 
