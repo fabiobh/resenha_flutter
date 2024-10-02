@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'second.dart';
+import 'package:flutter_resenha/views/login.dart';
+import 'components/my_image_button.dart';
+//import 'views/pesquisas.dart';
+import 'constants/my_constants.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides(); // only valid in development because of https self-signed certificate
@@ -37,8 +40,6 @@ class MyApp extends StatelessWidget {
         // state is not lost during the reload. To reset the state, use hot
         // restart instead.
         //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         useMaterial3: true,
       ),
@@ -140,71 +141,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            const SizedBox(height: 50),
-
-            // #2            
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child:  ElevatedButton(
-                style: ButtonStyle(
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      side: const BorderSide(color: Colors.grey),
-                    )
-                  )
-                ),
-                onPressed: () {
-                  debugPrint("df");
-                }, 
-                child:  const SizedBox(
-                  height: 40,
-                  width: double.infinity,
-                  child:  Row(
-                    children: [
-                      Icon(Icons.add),
-                      SizedBox(width: 10),
-                      Text("Resenha Virtual Equideos"),                  
-                    ],
-                  ),
-                ),
-              )
-            ),
-
             const SizedBox(height: 20),
-            
-            // #3
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child:  ElevatedButton(
-                style: ButtonStyle(
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      side: const BorderSide(color: Colors.grey),
-                    )
-                  )
-                ),
-                onPressed: () {
-                  debugPrint("df");
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MySecondWidget()));
-                }, 
-                child:  const SizedBox(
-                  height: 40,
-                  width: double.infinity,
-                  child:  Row(
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(width: 10),
-                      Text("Pesquisa"),     
-                    ],
-                  ),
-                ),
-              )
-            ),
+            const MyLoginButtonWidget(),
 
+            const SizedBox(height: 50),
+            const MyImageButton(nomeBotao: MyStrings.resenhaVirtualEquideos),
             
-
+            const SizedBox(height: 20),
+            const MyImageButton(nomeBotao: MyStrings.pesquisa),
                                     
           ],
         ),
@@ -212,6 +156,46 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
       // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+}
+
+class MyLoginButtonWidget extends StatelessWidget {
+  const MyLoginButtonWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child:  ElevatedButton(
+        style: ButtonStyle(
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0.0),
+              side: const BorderSide(color: Colors.grey),
+            )
+          )
+        ),
+        
+        onPressed: () {
+          debugPrint("redirect to another widget view");
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginView()));            
+                
+        }, 
+
+        child: const SizedBox(
+          height: 40,
+          width: double.infinity,
+          child: Row(
+            children: [
+              Icon(Icons.search),
+              SizedBox(width: 10),
+              Text("Login2"),     
+            ],
+          ),
+        ),
+      )
     );
   }
 }

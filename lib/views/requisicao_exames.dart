@@ -4,10 +4,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:flutter_resenha/model/Album.dart';
-import 'package:flutter_resenha/components/my_dialog.dart';
+import 'package:flutter_resenha/model/album.dart';
+import 'package:flutter_resenha/components/my_alert_dialog.dart';
 
-import 'components/my_network_manaher.dart';
+import '../components/my_network_manager.dart';
+import '../components/auth.dart';
+
 
 Future<Album> fetchAlbum() async {
   final response = await http
@@ -37,10 +39,14 @@ valor para pesquisar no treina: 2023001928000022003740062006941
 
 
   //const baseUrl = "https://10.5.66.23:9443/gedave/api/spservicos/v1";
-  //const baseUrl = "https://treinagedave.defesaagropecuaria.sp.gov.br/gedave/api/spservicos/v1";
-  const baseUrl = "https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1";
+  const baseUrl = "https://treinagedave.defesaagropecuaria.sp.gov.br/gedave/api/spservicos/v1";
+  //const baseUrl = "https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1";
   final uri = Uri.parse( '$baseUrl/buscaRequisicaoExame');
-  final headers = {'Content-Type': 'application/json'};
+  final headers = {
+    'Content-Type': 'application/json',
+    'authorization': getBasicAuthString()
+    //'Authorization': 'Basic d3NTcFNlcnZpY29zVXNlcjolJFM5cDhTN2U2cjV2NGkzYzJvMXMkJQ=='
+  };
   //Map<String, dynamic> body = {'codigoBarra': "2024001928002702372700062046654"};
   Map<String, dynamic> body = {'codigoBarra': inputText};
   String jsonBody = json.encode(body);
@@ -58,6 +64,7 @@ valor para pesquisar no treina: 2023001928000022003740062006941
   debugPrint("responseBody: $responseBody statusCode: $statusCode");
 }
 
+/*
 makePostRequest() async {
 
   final uri = Uri.parse('http://httpbin.org/post');
@@ -77,6 +84,7 @@ makePostRequest() async {
   String responseBody = response.body;
   debugPrint("responseBody: $responseBody statusCode: $statusCode");
 }
+*/
 
 class RequisicaoExamesWidget extends StatefulWidget {
   const RequisicaoExamesWidget({super.key});
@@ -108,7 +116,7 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    
+        
     return Scaffold(
       appBar: AppBar(
         title: const Text('Requisição de Exames'),
@@ -118,12 +126,20 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
         child: Column(
           children: [
             const SizedBox(height: 80),
-            const Text("Requisição de Exame"),
+            const Text("- Requisição de Exame -"),
             const SizedBox(height: 20),
-            TextField(
-              style: const TextStyle(),
-              controller: controller,
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Digite código de barra'
+                ),
+                style: const TextStyle(),
+                controller: controller,
+              ),
             ),
+            
                         
             const SizedBox(height: 20),
             /*
@@ -160,8 +176,10 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
                   });
                   debugPrint("consultar: $text");
                   //makePostRequestGedavePesquisaRequisicaoExame(text);
-                  readRequisicaoExame();
-                  showAlertDialog1(context, "oi");
+                  
+                  readRequisicaoExame(context, text); // 2024001928002702372700062046654
+                  //showAlertDialog1(context, "oi");
+                  debugPrint("getBasicAuthString(): ${getBasicAuthString()}");
                 },
               child: const MyConsultarText(),              
             ),
@@ -179,19 +197,15 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
 
 }
 
-Future<void> readRequisicaoExame() async {
-  final networkManager = NetworkManager(
-    defaultHeaders: {
-      //'Content-Type': 'application/json',
-      //'Authorization': 'Bearer your_token_here',
-    },
-  );
-
+Future<void> readRequisicaoExame(BuildContext context, String valorCodigoBarra) async {
+  
+  final networkManager = NetworkManager();
+  
   try {
     final response = await networkManager.put(
       '/buscaRequisicaoExame', 
       body: {
-        'codigoBarra': '2024001928002702372700062046654',
+        'codigoBarra': valorCodigoBarra,
       },
     );
 
@@ -208,6 +222,9 @@ Future<void> readRequisicaoExame() async {
   } catch (e) {
     // Handle errors
     debugPrint('Failed to handle request: $e');
+    if (context.mounted) {
+      showAlertDialog1(context, e.toString());
+    }
   }
 }
 

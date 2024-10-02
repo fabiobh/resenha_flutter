@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkManager {
@@ -7,10 +8,14 @@ class NetworkManager {
   // const baseUrl = "https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1";
 
   final String baseUrl = "https://treinagedave.defesaagropecuaria.sp.gov.br/gedave/api/spservicos/v1";
-  final Map<String, String> defaultHeaders;
+  Map<String, String> defaultHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic d3NTcFNlcnZpY29zVXNlcjolJFM5cDhTN2U2cjV2NGkzYzJvMXMkJQ=='
+    };
 
   //NetworkManager({required this.baseUrl, required this.defaultHeaders});
-  NetworkManager({required this.defaultHeaders});
+  //NetworkManager({required this.defaultHeaders});  
+  NetworkManager();
 
   // GET request
   Future<dynamic> get(String endpoint, {Map<String, String>? headers}) async {
@@ -64,7 +69,8 @@ class NetworkManager {
       case 500:
         throw Exception('Internal Server Error: ${response.body}');
       default:
-        throw Exception('Error: ${response.statusCode} ${response.body}');
+        debugPrint("${response.statusCode} - ${response.body}");
+        throw ErrorDescription(response.body);
     }
   }
 }

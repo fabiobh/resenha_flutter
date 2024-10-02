@@ -1,10 +1,11 @@
 //import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_resenha/requisicao_exames.dart';
+import 'package:flutter_resenha/components/my_image_button.dart';
+import 'package:flutter_resenha/views/requisicao_exames.dart';
 
-class MySecondWidget extends StatelessWidget {
-  const MySecondWidget({super.key});
+class PesquisasWidget extends StatelessWidget {
+  const PesquisasWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,9 @@ class MySecondWidget extends StatelessWidget {
               width: 150,
               fit: BoxFit.contain,
             ),
+            
+            const SizedBox(height: 50,),
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child:  ElevatedButton(
@@ -42,7 +46,7 @@ class MySecondWidget extends StatelessWidget {
                   width: double.infinity,
                   child:  Row(
                     children: [
-                      Icon(Icons.add),
+                      Icon(Icons.search),
                       SizedBox(width: 10),
                       Text("Pesquisa Requisição de Exames"),
                     ],
@@ -52,6 +56,17 @@ class MySecondWidget extends StatelessWidget {
             ),
 
             const SizedBox(height: 20),
+
+            const MyImageButton(nomeBotao: 'Pesquisa Requisição de Exames'),
+            const SizedBox(height: 10),
+
+            const MyImageButton(nomeBotao: 'Pesquisa Requisição de Exames 2'),
+            const SizedBox(height: 10),
+
+            const MyImageButton(nomeBotao: 'sdsd'),
+            const SizedBox(height: 10),
+
+
              
           ],
         ),
@@ -62,3 +77,5 @@ class MySecondWidget extends StatelessWidget {
     );
   }
 }
+
+
