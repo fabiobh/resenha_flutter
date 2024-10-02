@@ -24,9 +24,11 @@ class LoginView extends StatelessWidget {
             ),
             
             const Padding(padding: EdgeInsets.symmetric(horizontal: 20), child: MyTextFieldBorderWidget()),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
 
             const Padding(padding: EdgeInsets.symmetric(horizontal: 20), child: MyTextFieldBorderWidget()),
+
+
 
 
              
@@ -51,15 +53,16 @@ class MyTextFieldBorderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TextField(
+    return TextField(
         decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.purple, width: 5.0),
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.purple, width: 5.0),                
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                borderSide: const BorderSide(color: Colors.grey, width: 2.0),
+                borderRadius: BorderRadius.circular(10),
             ),
-            hintText: 'Mobile Number',
+            hintText: 'CPF',
         ),
     );
   }
