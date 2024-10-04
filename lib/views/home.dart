@@ -3,6 +3,7 @@
 import 'package:flutter_resenha/components/my_image_button.dart';
 import 'package:flutter_resenha/views/login.dart';
 import 'package:flutter_resenha/views/toogle_password.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/instance_manager.dart';
 
@@ -93,11 +94,11 @@ class MyLoginButtonWidget extends StatelessWidget {
         ),
         
         onPressed: () {
-          debugPrint("redirect to another widget view");
-          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginViewFull()));
-          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TogglePassworView()));
-          //Get.put(const TogglePassworView());
-          Get.put(ToogleController());
+          debugPrint("redirect to another widget view v1");
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginViewFull()));
+          
+          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PassworView()));
+          //Get.to(()=> const LoginViewFull());
         }, 
 
         child: const SizedBox(

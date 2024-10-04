@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class ToogleController extends GetxController {
   var isPasswordHideen = true.obs;
-
-
-
+  
 }
 
-class TogglePassworView extends GetView<ToogleController> {
-  const TogglePassworView({super.key});
-
+//class PassworView extends GetView<ToogleController> {
+class PassworView extends StatelessWidget {
+  const PassworView({super.key});
+  
   @override
   Widget build(BuildContext context) {
-    
-    return 
-    Scaffold(
+    return GetBuilder<ToogleController>(
+      init: ToogleController(),
+      builder: (controller) => Scaffold(
       appBar: AppBar(
         title: const Text('Resenhas'),
         backgroundColor: Colors.yellow,
@@ -38,7 +36,9 @@ class TogglePassworView extends GetView<ToogleController> {
               ),
             )
           )
-      ],) 
+        ],
+      ) 
+      )
     );
   }
 

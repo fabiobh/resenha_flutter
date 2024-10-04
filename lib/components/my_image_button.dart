@@ -26,7 +26,7 @@ class MyImageButton extends StatelessWidget {
         ),
         
         onPressed: () {
-          debugPrint("redirect to another widget view");
+          debugPrint("redirect to another widget view v0");
           if (nomeBotao == MyStrings.pesquisa) {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PesquisasWidget()));
           } else if (nomeBotao == MyStrings.resenhaVirtualEquideos) {

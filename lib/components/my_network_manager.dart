@@ -10,6 +10,8 @@ class NetworkManager {
   final String baseUrl = "https://treinagedave.defesaagropecuaria.sp.gov.br/gedave/api/spservicos/v1";
   Map<String, String> defaultHeaders = {
       'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Accept': '*/*',
       'Authorization': 'Basic d3NTcFNlcnZpY29zVXNlcjolJFM5cDhTN2U2cjV2NGkzYzJvMXMkJQ=='
     };
 
@@ -24,6 +26,7 @@ class NetworkManager {
     final response = await http.get(
       url,
       headers: headers ?? defaultHeaders,
+      
     );
 
     return _processResponse(response);

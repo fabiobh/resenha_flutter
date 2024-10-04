@@ -40,7 +40,7 @@ class _LoginViewFullState extends State<LoginViewFull> {
   void _buttonPressed() {
     debugPrint('Botão pressionado com texto: $_cpfValue'); // Exibe o valor atual
     debugPrint('Botão pressionado com texto: $_passwordValue');
-    makeLoginRequest(context, _cpfValue, _passwordValue);
+    makeLoginRequest(_cpfValue, _passwordValue);
   }
 
   @override
@@ -86,7 +86,7 @@ class _LoginViewFullState extends State<LoginViewFull> {
 
 }
 
-void makeLoginRequest(context, String cpf, String senha) async {
+void makeLoginRequest(String cpf, String senha) async {
 
   debugPrint("makeLoginRequest");
   final networkManager = NetworkManager();  
@@ -103,14 +103,14 @@ void makeLoginRequest(context, String cpf, String senha) async {
     final pessoa = MinhaPessoa.fromJson(response);
     debugPrint(pessoa.usuario!.cpf);
 
-    debugPrint("redirect to another widget view");
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuPrincipalWidget()));
+    debugPrint("redirect to another widget view v2");
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuPrincipalWidget()));
     
   } catch (e) {
     // Handle errors
-    debugPrint('Failed to handle request: $e');
+    debugPrint('Failed to handle request v0: $e');
     //if (context.mounted) {
-      showAlertDialog1(context, e.toString());
+      //showAlertDialog1(context, e.toString());
     //}
   }
 

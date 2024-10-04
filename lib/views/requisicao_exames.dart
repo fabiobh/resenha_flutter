@@ -215,7 +215,7 @@ Future<void> readRequisicaoExame(BuildContext context, String valorCodigoBarra) 
     */
   } catch (e) {
     // Handle errors
-    debugPrint('Failed to handle request: $e');
+    debugPrint('Failed to handle request v1: $e');
     if (context.mounted) {
       showAlertDialog1(context, e.toString());
     }

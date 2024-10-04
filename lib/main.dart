@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_resenha/views/home.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 //import 'package:flutter_resenha/views/login.dart';
 //import 'components/my_image_button.dart';
 //import 'views/pesquisas.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Resenha',
       theme: ThemeData(
         // This is the theme of your application.
