@@ -1,49 +1,40 @@
-// To parse this JSON data, do
-//
-//     final pessoa = pessoaFromJson(jsonString);
+class MinhaPessoa {
+  Usuario? usuario;
 
-import 'dart:convert';
+  MinhaPessoa({this.usuario});
 
-Pessoa pessoaFromJson(String str) => Pessoa.fromJson(json.decode(str));
+  MinhaPessoa.fromJson(Map<String, dynamic> json) {
+    usuario =
+        json['usuario'] != null ? new Usuario.fromJson(json['usuario']) : null;
+  }
 
-String pessoaToJson(Pessoa data) => json.encode(data.toJson());
-
-class Pessoa {
-    Usuario usuario;
-
-    Pessoa({
-        required this.usuario,
-    });
-
-    factory Pessoa.fromJson(Map<String, dynamic> json) => Pessoa(
-        usuario: Usuario.fromJson(json["usuario"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "usuario": usuario.toJson(),
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.usuario != null) {
+      data['usuario'] = this.usuario!.toJson();
+    }
+    return data;
+  }
 }
 
 class Usuario {
-    String nome;
-    String cpf;
-    String token;
+  String? nome;
+  String? cpf;
+  String? token;
 
-    Usuario({
-        required this.nome,
-        required this.cpf,
-        required this.token,
-    });
+  Usuario({this.nome, this.cpf, this.token});
 
-    factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        nome: json["nome"],
-        cpf: json["cpf"],
-        token: json["token"],
-    );
+  Usuario.fromJson(Map<String, dynamic> json) {
+    nome = json['nome'];
+    cpf = json['cpf'];
+    token = json['token'];
+  }
 
-    Map<String, dynamic> toJson() => {
-        "nome": nome,
-        "cpf": cpf,
-        "token": token,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['nome'] = this.nome;
+    data['cpf'] = this.cpf;
+    data['token'] = this.token;
+    return data;
+  }
 }

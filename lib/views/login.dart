@@ -101,26 +101,10 @@ void makeLoginRequest(String cpf, String senha) async {
     );
 
     debugPrint('response updated successfully: $response');
-    
-    String updatedName = response['usuario']['nome'];
-    debugPrint('Updated name: $updatedName');
-    var map = json.encode(response);
-
-    debugPrint("map: $map");
-
-    var aaaa = "{'nome':'Pessoa Física 458583','cpf':'599.368.789-49','token':'jT57HuhLCLJtxWqP4JIZZSf5s-2BdYL-2FjMHkQrUVDEvw2wcPsdOeVCJ7lPVOoPNVtE767AE5JCkR22-0Az18MDTbBTW7Y9QyrZ6-2BusytkOB8f1cdLDM88p4IiGI-2FFd7dPtcU-2Bz8bbw3VTcpVRtj2CvnZvnw-3D-3D'}";
-    debugPrint('aaaa: $aaaa');
-
+        
     //var p = People("nome1", "cpf1", "token1");
-    final pessoa = pessoaFromJson(response);
-    
-    //Map<String, dynamic> map = jsonDecode( response['usuario'] );
-    //debugPrint('p.toJson(): $p.toJson()');
-    //debugPrint(p.token);
-
-    //Pessoa bbb = JsonDecoder().convert(aaaa);
-    //final userMap = jsonDecode(response['usuario']);
-    
+    final pessoa = MinhaPessoa.fromJson(response);
+    debugPrint(pessoa.usuario!.cpf);
     
   } catch (e) {
     // Handle errors
