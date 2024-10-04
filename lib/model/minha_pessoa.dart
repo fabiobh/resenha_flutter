@@ -1,20 +1,21 @@
-// https://javiercbk.github.io/json_to_dart/
-// modelo criado a partir do copia e cola no site acima
 
 class MinhaPessoa {
+  // https://javiercbk.github.io/json_to_dart/
+  // modelo criado a partir do copia e cola no site acima
+
   Usuario? usuario;
 
-  MinhaPessoa({this.usuario});
+  MinhaPessoa({usuario});
 
   MinhaPessoa.fromJson(Map<String, dynamic> json) {
     usuario =
-        json['usuario'] != null ? new Usuario.fromJson(json['usuario']) : null;
+        json['usuario'] != null ? Usuario.fromJson(json['usuario']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.usuario != null) {
-      data['usuario'] = this.usuario!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (usuario != null) {
+      data['usuario'] = usuario!.toJson();
     }
     return data;
   }
@@ -34,10 +35,10 @@ class Usuario {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['nome'] = this.nome;
-    data['cpf'] = this.cpf;
-    data['token'] = this.token;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['nome'] = nome;
+    data['cpf'] = cpf;
+    data['token'] = token;
     return data;
   }
 }

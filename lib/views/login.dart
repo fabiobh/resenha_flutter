@@ -1,12 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'package:flutter_resenha/components/my_alert_dialog.dart';
+//import 'dart:convert';
 //import 'package:flutter_resenha/components/my_image_button.dart';
 //import 'package:flutter_resenha/constants/my_constants.dart';
 //import 'package:flutter_resenha/views/requisicao_exames.dart';
-import 'package:flutter_resenha/components/auth.dart';
+//import 'package:flutter_resenha/components/auth.dart';
 import 'package:flutter_resenha/components/my_network_manager.dart';
-import 'package:flutter_resenha/model/Pessoa.dart';
-import 'package:flutter_resenha/model/people.dart';
+import 'package:flutter_resenha/model/minha_pessoa.dart';
+import 'package:flutter_resenha/views/menu_principal.dart';
 
 class LoginViewFull extends StatefulWidget {
   const LoginViewFull({super.key});
@@ -38,7 +40,7 @@ class _LoginViewFullState extends State<LoginViewFull> {
   void _buttonPressed() {
     debugPrint('Botão pressionado com texto: $_cpfValue'); // Exibe o valor atual
     debugPrint('Botão pressionado com texto: $_passwordValue');
-    makeLoginRequest(_cpfValue, _passwordValue);
+    makeLoginRequest(context, _cpfValue, _passwordValue);
   }
 
   @override
@@ -63,9 +65,6 @@ class _LoginViewFullState extends State<LoginViewFull> {
             CpfTextField(onChanged: _updateCpf),
             const SizedBox(height: 20),
 
-            //CpfTextField(onChanged: _updateText),                        
-            //const SizedBox(height: 20),
-
             PasswordTextField(onChanged: _updateSenha),
             const SizedBox(height: 20),
 
@@ -87,7 +86,7 @@ class _LoginViewFullState extends State<LoginViewFull> {
 
 }
 
-void makeLoginRequest(String cpf, String senha) async {
+void makeLoginRequest(context, String cpf, String senha) async {
 
   debugPrint("makeLoginRequest");
   final networkManager = NetworkManager();  
@@ -100,20 +99,19 @@ void makeLoginRequest(String cpf, String senha) async {
       },
     );
 
-    debugPrint('response updated successfully: $response');
-        
-    //var p = People("nome1", "cpf1", "token1");
+    debugPrint('response updated successfully: $response');        
     final pessoa = MinhaPessoa.fromJson(response);
     debugPrint(pessoa.usuario!.cpf);
+
+    debugPrint("redirect to another widget view");
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MenuPrincipalWidget()));
     
   } catch (e) {
     // Handle errors
     debugPrint('Failed to handle request: $e');
-    /*
-    if (context.mounted) {
+    //if (context.mounted) {
       showAlertDialog1(context, e.toString());
-    }
-    */
+    //}
   }
 
 }
@@ -127,9 +125,13 @@ class CpfTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String textoInicial = "";
+    if (kDebugMode) { textoInicial = "59936878949"; }
+    
     return 
     Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: 
-      TextField(
+      TextFormField(
+        initialValue: textoInicial,
         onChanged: (value) {
           // Passa o valor do TextField para o widget pai
           onChanged(value);
@@ -159,16 +161,21 @@ class PasswordTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String textoInicial = "";
+    if (kDebugMode) { textoInicial = "gdv01922"; }
+    
     return 
     Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: 
-      TextField(
+      TextFormField(
+        initialValue: textoInicial,
+        obscureText: true,
         onChanged: (value) {
           // Passa o valor do TextField para o widget pai
           onChanged(value);
           debugPrint("value: $value");
         },
         decoration: InputDecoration(
-          labelText: 'Senh',
+          labelText: "Senha",
           focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.blue, width: 2.0),     
                 borderRadius: BorderRadius.circular(10),           
