@@ -29,14 +29,11 @@ Future<Album> fetchAlbum() async {
 
 makePostRequestGedavePesquisaRequisicaoExame(inputText) async {
 
-/*
-urlBase:
-https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1/
-https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1/buscaRequisicaoExame
-valor para pesquisar no G2: 2024001928002702372700062046654
-valor para pesquisar no treina: 2023001928000022003740062006941
-*/
-
+//urlBase:
+//https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1/
+//https://gedave-proxyhml.agricultura.sp.gov.br/gedave/api/spservicos/v1/buscaRequisicaoExame
+//valor para pesquisar no G2: 2024001928002702372700062046654
+//valor para pesquisar no treina: 2023001928000022003740062006941
 
   //const baseUrl = "https://10.5.66.23:9443/gedave/api/spservicos/v1";
   const baseUrl = "https://treinagedave.defesaagropecuaria.sp.gov.br/gedave/api/spservicos/v1";
@@ -198,7 +195,7 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
 }
 
 Future<void> readRequisicaoExame(BuildContext context, String valorCodigoBarra) async {
-  
+  debugPrint("readRequisicaoExame");
   final networkManager = NetworkManager();
   
   try {
@@ -214,10 +211,7 @@ Future<void> readRequisicaoExame(BuildContext context, String valorCodigoBarra) 
     // If the response contains some specific data (e.g. updated user info), you can access it:
     /*
     String updatedName = response['name'];
-    String updatedEmail = response['email'];
-
     print('Updated name: $updatedName');
-    print('Updated email: $updatedEmail');
     */
   } catch (e) {
     // Handle errors

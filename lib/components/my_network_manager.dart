@@ -20,6 +20,7 @@ class NetworkManager {
   // GET request
   Future<dynamic> get(String endpoint, {Map<String, String>? headers}) async {
     final url = Uri.parse('$baseUrl$endpoint');
+    debugPrint("get url: $url");
     final response = await http.get(
       url,
       headers: headers ?? defaultHeaders,
@@ -31,6 +32,8 @@ class NetworkManager {
   // POST request
   Future<dynamic> post(String endpoint, {Map<String, dynamic>? body, Map<String, String>? headers}) async {
     final url = Uri.parse('$baseUrl$endpoint');
+    debugPrint("post url: $url");
+    debugPrint("body: $body");
     final response = await http.post(
       url,
       headers: headers ?? defaultHeaders,
@@ -43,6 +46,8 @@ class NetworkManager {
   // PUT request
   Future<dynamic> put(String endpoint, {Map<String, dynamic>? body, Map<String, String>? headers}) async {
     final url = Uri.parse('$baseUrl$endpoint');
+    debugPrint("put url: $url");
+    debugPrint("body: $body");
     final response = await http.put(
       url,
       headers: headers ?? defaultHeaders,

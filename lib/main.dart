@@ -18,6 +18,8 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -180,8 +182,7 @@ class MyLoginButtonWidget extends StatelessWidget {
         
         onPressed: () {
           debugPrint("redirect to another widget view");
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginView()));            
-                
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginViewFull()));
         }, 
 
         child: const SizedBox(
@@ -199,3 +200,4 @@ class MyLoginButtonWidget extends StatelessWidget {
     );
   }
 }
+
