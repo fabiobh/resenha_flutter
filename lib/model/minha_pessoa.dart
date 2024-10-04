@@ -1,3 +1,6 @@
+// https://javiercbk.github.io/json_to_dart/
+// modelo criado a partir do copia e cola no site acima
+
 class MinhaPessoa {
   Usuario? usuario;
 
