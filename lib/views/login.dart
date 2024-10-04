@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 //import 'package:flutter_resenha/components/my_image_button.dart';
 //import 'package:flutter_resenha/constants/my_constants.dart';
 //import 'package:flutter_resenha/views/requisicao_exames.dart';
 import 'package:flutter_resenha/components/auth.dart';
 import 'package:flutter_resenha/components/my_network_manager.dart';
+import 'package:flutter_resenha/model/Pessoa.dart';
+import 'package:flutter_resenha/model/people.dart';
 
 class LoginViewFull extends StatefulWidget {
   const LoginViewFull({super.key});
@@ -77,44 +80,12 @@ class _LoginViewFullState extends State<LoginViewFull> {
           ],
         ),
       )
-      
-
         
     );
   }
 
 
 }
-
-
-
-class MyTextFieldBorderCpfWidget extends StatelessWidget {
-  const MyTextFieldBorderCpfWidget({super.key});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-        decoration: InputDecoration(
-            labelText: 'CPF',
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.blue, width: 5.0),                
-                borderRadius: BorderRadius.circular(10),
-            ),
-            enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.grey, width: 2.0),
-                borderRadius: BorderRadius.circular(10),
-            ),
-            hintText: 'CPF',
-        ),
-    );
-  }
-}
-
-
-
-
-
 
 void makeLoginRequest(String cpf, String senha) async {
 
@@ -130,10 +101,27 @@ void makeLoginRequest(String cpf, String senha) async {
     );
 
     debugPrint('response updated successfully: $response');
-    /*
-    String updatedName = response['name'];
-    print('Updated name: $updatedName');
-    */
+    
+    String updatedName = response['usuario']['nome'];
+    debugPrint('Updated name: $updatedName');
+    var map = json.encode(response);
+
+    debugPrint("map: $map");
+
+    var aaaa = "{'nome':'Pessoa Física 458583','cpf':'599.368.789-49','token':'jT57HuhLCLJtxWqP4JIZZSf5s-2BdYL-2FjMHkQrUVDEvw2wcPsdOeVCJ7lPVOoPNVtE767AE5JCkR22-0Az18MDTbBTW7Y9QyrZ6-2BusytkOB8f1cdLDM88p4IiGI-2FFd7dPtcU-2Bz8bbw3VTcpVRtj2CvnZvnw-3D-3D'}";
+    debugPrint('aaaa: $aaaa');
+
+    //var p = People("nome1", "cpf1", "token1");
+    final pessoa = pessoaFromJson(response);
+    
+    //Map<String, dynamic> map = jsonDecode( response['usuario'] );
+    //debugPrint('p.toJson(): $p.toJson()');
+    //debugPrint(p.token);
+
+    //Pessoa bbb = JsonDecoder().convert(aaaa);
+    //final userMap = jsonDecode(response['usuario']);
+    
+    
   } catch (e) {
     // Handle errors
     debugPrint('Failed to handle request: $e');
