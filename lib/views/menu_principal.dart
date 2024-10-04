@@ -36,14 +36,12 @@ class _MenuPrincipalDetailsyWidgetState extends State<MenuPrincipalDetailsyWidge
     return 
       Center(
           child: Column(children: [
-            const SizedBox(height: 20),
             Image.asset("_assets_/resenha_2.png", 
               height: 200, 
               width: 150,
               fit: BoxFit.contain,
             ),
 
-            const SizedBox(height: 20),
             const Text(
               'Equideos',
               style: TextStyle(
@@ -51,18 +49,21 @@ class _MenuPrincipalDetailsyWidgetState extends State<MenuPrincipalDetailsyWidge
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             Container(
-              height: 100, 
+              height: 70, 
               width: double.infinity,
-              margin: const EdgeInsets.all(15.0),
-              padding: const EdgeInsets.all(3.0),
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.all(2.0),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 2)
               ),
               child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('My Awesome Border'),
+                  Text('Veterinário Responsável'),
+                  Text('Nome da pessoa'),
+                  Text('000.000.000-00 - CRMV-SP: 1234567890'),
                 ],
               ),
             )
