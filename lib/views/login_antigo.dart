@@ -4,37 +4,48 @@ import 'package:flutter_resenha/components/my_alert_dialog.dart';
 import 'package:flutter_resenha/components/my_network_manager.dart';
 import 'package:flutter_resenha/model/minha_pessoa.dart';
 import 'package:flutter_resenha/views/menu_principal.dart';
-import 'package:get/get.dart';
 
+class LoginViewFull extends StatefulWidget {
+  const LoginViewFull({super.key});
 
-/*
-        Obx(()=>
-          Text(controller.meuNomeValor.value)
-        ),
-*/
-
-//-----
-
-class LoginGetxController extends GetxController {
-  RxString nomeValor = "".obs;
-  RxString senhaValor = "".obs;  
+  @override
+  State<LoginViewFull> createState() => _LoginViewFullState();
 }
 
-class LoginViewGetxFull extends StatelessWidget {
-  
-  const LoginViewGetxFull({super.key});
-  
+class _LoginViewFullState extends State<LoginViewFull> {
+  String _cpfValue = ''; // Variável para armazenar o valor do TextField
+  String _passwordValue = '';
+
+  // Função que atualiza o valor do TextField
+  void _updateCpf(String newText) {
+    debugPrint('Valor atualizado cpf: $newText'); // Verificação do valor atualizado
+    setState(() {
+      _cpfValue = newText; // Atualiza o estado
+    });
+  }
+
+  void _updateSenha(String newText) {
+    debugPrint('Valor atualizado senha: $newText'); // Verificação do valor atualizado
+    setState(() {
+      _passwordValue = newText; // Atualiza o estado
+    });
+  }
+
+  // Função que será chamada quando o botão for pressionado
+  void _buttonPressed() {
+    debugPrint('Botão pressionado com texto: $_cpfValue'); // Exibe o valor atual
+    debugPrint('Botão pressionado com texto: $_passwordValue');
+    makeLoginRequest(context, _cpfValue, _passwordValue);
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    return GetBuilder<LoginGetxController>(
-      init: LoginGetxController(),
-      builder: (controller) => Scaffold(
+    
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Resenhas'),
         backgroundColor: Colors.yellow,
       ),
-
       body: Center(
         child: Column(
           children: [
@@ -45,25 +56,30 @@ class LoginViewGetxFull extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             
-            const CpfTextField(),
+            //MyCustomTextField(onChanged: _updateText), 
+            CpfTextField(onChanged: _updateCpf),
             const SizedBox(height: 20),
-            
-            //Obx(() => Text(controller.nomeValor.value)),
-            const PasswordTextField(),
+
+            PasswordTextField(onChanged: _updateSenha),
             const SizedBox(height: 20),
+
+            MyCustomButton(
+              textValue: _cpfValue, // Passa o valor do TextField para o botão
+              onPressed: _buttonPressed, // Passa a função que será chamada no botão
+            ),
             
-            const MyRequestButton(),
+            
+
              
           ],
         ),
-       )
       )
+        
     );
   }
 
 
 }
-
 
 void makeLoginRequest(context, String cpf, String senha) async {
 
@@ -100,23 +116,23 @@ void makeLoginRequest(context, String cpf, String senha) async {
 // separar
 
 class CpfTextField extends StatelessWidget {
+  final Function(String) onChanged;
 
-  const CpfTextField({super.key});
+  const CpfTextField({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     String textoInicial = "";
     if (kDebugMode) { textoInicial = "59936878949"; }
     
-    LoginGetxController loginGetxController = Get.put(LoginGetxController());
-
     return 
     Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: 
       TextFormField(
         initialValue: textoInicial,
         onChanged: (value) {
-          loginGetxController.nomeValor.value = value;
-          debugPrint("valueCpf: $value");
+          // Passa o valor do TextField para o widget pai
+          onChanged(value);
+          debugPrint("value: $value");
         },
         decoration: InputDecoration(
           labelText: 'CPF',
@@ -136,28 +152,24 @@ class CpfTextField extends StatelessWidget {
 
 
 class PasswordTextField extends StatelessWidget {
-  
-  const PasswordTextField({super.key});
+  final Function(String) onChanged;
 
+  const PasswordTextField({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-
-    final LoginGetxController loginGetxController = Get.put(LoginGetxController());
-
     String textoInicial = "";
     if (kDebugMode) { textoInicial = "gdv01922"; }
     
     return 
     Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: 
       TextFormField(
-        
         initialValue: textoInicial,
         obscureText: true,
         onChanged: (value) {
-          loginGetxController.senhaValor.value = value;
-          debugPrint("valuesenha: $value");
-          debugPrint('valuesenha v2: ${loginGetxController.senhaValor.value}');
+          // Passa o valor do TextField para o widget pai
+          onChanged(value);
+          debugPrint("value: $value");
         },
         decoration: InputDecoration(
           labelText: "Senha",
@@ -175,21 +187,16 @@ class PasswordTextField extends StatelessWidget {
   }
 }
 
-class MyRequestButton extends StatelessWidget {
-  
-  const MyRequestButton({super.key});
-    
+class MyCustomButton extends StatelessWidget {
+  final String textValue;
+  final VoidCallback onPressed;
+
+  const MyCustomButton({super.key, required this.textValue, required this.onPressed});
+
   @override
   Widget build(BuildContext context) {
-
-    final LoginGetxController loginGetxController = Get.put(LoginGetxController());
-
     return ElevatedButton(
-      onPressed: () {
-        debugPrint('Botão pressionado com texto v1: {$loginGetxController.nomeValor}'); // Exibe o valor atual
-        debugPrint('Botão pressionado com texto v2: $loginGetxController.senhaValor');
-        makeLoginRequest(context, loginGetxController.nomeValor.value, loginGetxController.senhaValor.value);
-      }, // Chama a função passada pelo widget pai
+      onPressed: onPressed, // Chama a função passada pelo widget pai
       child: const Text('Consultar'), // Exibe o valor atualizado
     );
   }

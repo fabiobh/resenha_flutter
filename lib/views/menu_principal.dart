@@ -2,14 +2,12 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_resenha/views/home.dart';
 
-class MenuPrincipalWidget extends StatefulWidget {
-  const MenuPrincipalWidget({super.key});
+class MenuPrincipalWidget extends StatelessWidget {
+  final String nome;
+  final String cpf;
 
-  @override
-  State<MenuPrincipalWidget> createState() => _MenuPrincipalWidgetState();
-}
-
-class _MenuPrincipalWidgetState extends State<MenuPrincipalWidget> {
+  const MenuPrincipalWidget({super.key, required this.nome, required this.cpf});
+  
   @override
   Widget build(BuildContext context) {
     
@@ -18,21 +16,20 @@ class _MenuPrincipalWidgetState extends State<MenuPrincipalWidget> {
         title: const Text('Menu Principal'),
         backgroundColor: Colors.yellow,
       ),
-      body: const MenuPrincipalDetailsyWidget(),          
+      body: MenuPrincipalDetailsyWidget(nome: nome, cpf: cpf),          
     );
   }
 }
 
-class MenuPrincipalDetailsyWidget extends StatefulWidget {
-  const MenuPrincipalDetailsyWidget({super.key});
+class MenuPrincipalDetailsyWidget extends StatelessWidget {
+  final String nome;
+  final String cpf;
 
-  @override
-  State<MenuPrincipalDetailsyWidget> createState() => _MenuPrincipalDetailsyWidgetState();
-}
+  const MenuPrincipalDetailsyWidget({super.key, required this.nome, required this.cpf});
 
-class _MenuPrincipalDetailsyWidgetState extends State<MenuPrincipalDetailsyWidget> {
   @override
   Widget build(BuildContext context) {
+    
     return 
       Center(
           child: Column(children: [
@@ -58,12 +55,12 @@ class _MenuPrincipalDetailsyWidgetState extends State<MenuPrincipalDetailsyWidge
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 2)
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Veterinário Responsável'),
-                  Text('Nome da pessoa'),
-                  Text('000.000.000-00 - CRMV-SP: 1234567890'),
+                  const Text('Veterinário Responsável'),
+                  Text(nome),
+                  Text('$cpf - CRMV-SP: 0000000000'),
                 ],
               ),
             )
