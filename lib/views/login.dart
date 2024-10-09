@@ -27,9 +27,9 @@ class LoginViewGetxFull extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return GetBuilder<LoginGetxController>(
-      init: LoginGetxController(),
-      builder: (controller) => Scaffold(
+  LoginGetxController loginGetxController = Get.put(LoginGetxController());
+
+    return  Scaffold(
       appBar: AppBar(
         title: const Text('Resenhas'),
         backgroundColor: Colors.yellow,
@@ -57,7 +57,6 @@ class LoginViewGetxFull extends StatelessWidget {
           ],
         ),
        )
-      )
     );
   }
 
