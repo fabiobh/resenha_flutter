@@ -6,18 +6,10 @@ import 'package:flutter_resenha/model/minha_pessoa.dart';
 import 'package:flutter_resenha/views/menu_principal.dart';
 import 'package:get/get.dart';
 
-
-/*
-        Obx(()=>
-          Text(controller.meuNomeValor.value)
-        ),
-*/
-
-//-----
-
 class LoginGetxController extends GetxController {
   RxString nomeValor = "".obs;
-  RxString senhaValor = "".obs;  
+  RxString senhaValor = "".obs;
+  RxBool loading = false.obs;
 }
 
 class LoginViewGetxFull extends StatelessWidget {
@@ -28,7 +20,7 @@ class LoginViewGetxFull extends StatelessWidget {
   Widget build(BuildContext context) {
 
   LoginGetxController loginGetxController = Get.put(LoginGetxController());
-
+;
     return  Scaffold(
       appBar: AppBar(
         title: const Text('Resenhas'),
@@ -36,26 +28,15 @@ class LoginViewGetxFull extends StatelessWidget {
       ),
 
       body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            Image.asset("_assets_/resenha_2.png", 
-              height: 200, 
-              width: 150,
-              fit: BoxFit.contain,
+        child: 
+            Obx(()=>
+              Center(
+                child: loginGetxController.loading.value ? 
+                const LoadingShow(): 
+                const LoginScreen(),
+              )              
             ),
-            
-            const CpfTextField(),
-            const SizedBox(height: 20),
-            
-            //Obx(() => Text(controller.nomeValor.value)),
-            const PasswordTextField(),
-            const SizedBox(height: 20),
-            
-            const MyRequestButton(),
-             
-          ],
-        ),
+
        )
     );
   }
@@ -63,10 +44,68 @@ class LoginViewGetxFull extends StatelessWidget {
 
 }
 
+class LoadingShow extends StatelessWidget {
+  const LoadingShow({super.key});
 
-void makeLoginRequest(context, String cpf, String senha) async {
+  @override
+  Widget build(BuildContext context) {
+    return 
+    const Column(children: [
+                  SizedBox(height: 200),                  
+                  CircularProgressIndicator(),
+                  Text("Carregando"),
+                ]);
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return 
+    const Center(
+        child: Column(
+          children: [
+
+            SizedBox(height: 20),
+            HorseImage(),
+            
+            CpfTextField(),
+            SizedBox(height: 20),
+            
+            PasswordTextField(),
+            SizedBox(height: 20),
+            
+            MyRequestButton(),
+             
+          ],
+        ),
+       );
+
+  }
+}
+
+class HorseImage extends StatelessWidget {
+  const HorseImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset("_assets_/resenha_2.png", 
+              height: 200, 
+              width: 150,
+              fit: BoxFit.contain,
+            );
+  }
+}
+
+
+void makeLoginRequest(BuildContext context, String cpf, String senha) async {
 
   debugPrint("makeLoginRequest");
+
+  LoginGetxController loginGetxController = Get.put(LoginGetxController());
   final networkManager = NetworkManager();  
   try {
     final response = await networkManager.put(
@@ -84,19 +123,23 @@ void makeLoginRequest(context, String cpf, String senha) async {
     var meuNome = pessoa.usuario?.nome ?? "--";
     var meuCpf = pessoa.usuario?.cpf ?? "---";
 
-    debugPrint("redirect to another widget view v2");
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuPrincipalWidget(nome: meuNome, cpf: meuCpf)));
-    
+    debugPrint('loginGetxController.loading.value v1: ${loginGetxController.loading.value}');
+    loginGetxController.loading.value = false;
+    debugPrint("redirect to another widget view v3");
+    debugPrint('loginGetxController.loading.value v1: ${loginGetxController.loading.value}');
+    loginGetxController.update();
+    Get.to(()=> MenuPrincipalWidget(nome: meuNome, cpf: meuCpf));
+        
   } catch (e) {
+    loginGetxController.loading.value = false;
+    loginGetxController.update();
     debugPrint('Failed to handle request v0: $e');
-    //if (context.mounted) {
-      showAlertDialog1(context, e.toString());
-    //}
+    showBasicGetxDialog(e.toString());
+    
   }
 
 }
 
-// separar
 
 class CpfTextField extends StatelessWidget {
 
@@ -185,8 +228,8 @@ class MyRequestButton extends StatelessWidget {
 
     return ElevatedButton(
       onPressed: () {
-        debugPrint('Botão pressionado com texto v1: {$loginGetxController.nomeValor}'); // Exibe o valor atual
-        debugPrint('Botão pressionado com texto v2: $loginGetxController.senhaValor');
+        loginGetxController.loading.value = true;
+        debugPrint('Botão pressionado com texto v1: ${loginGetxController.senhaValor}');
         makeLoginRequest(context, loginGetxController.nomeValor.value, loginGetxController.senhaValor.value);
       }, // Chama a função passada pelo widget pai
       child: const Text('Consultar'), // Exibe o valor atualizado

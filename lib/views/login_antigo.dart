@@ -103,12 +103,11 @@ void makeLoginRequest(context, String cpf, String senha) async {
 
     debugPrint("redirect to another widget view v2");
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuPrincipalWidget(nome: meuNome, cpf: meuCpf)));
-    
+        
   } catch (e) {
     debugPrint('Failed to handle request v0: $e');
-    //if (context.mounted) {
-      showAlertDialog1(context, e.toString());
-    //}
+    showBasicGetxDialog(e.toString());
+    
   }
 
 }

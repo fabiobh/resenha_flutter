@@ -175,7 +175,6 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
                   //makePostRequestGedavePesquisaRequisicaoExame(text);
                   
                   readRequisicaoExame(context, text); // 2024001928002702372700062046654
-                  //showAlertDialog1(context, "oi");
                   debugPrint("getBasicAuthString(): ${getBasicAuthString()}");
                 },
               child: const MyConsultarText(),              
@@ -194,7 +193,7 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
 
 }
 
-Future<void> readRequisicaoExame(BuildContext context, String valorCodigoBarra) async {
+Future<void> readRequisicaoExame(String valorCodigoBarra) async {
   debugPrint("readRequisicaoExame");
   final networkManager = NetworkManager();
   
@@ -216,9 +215,8 @@ Future<void> readRequisicaoExame(BuildContext context, String valorCodigoBarra) 
   } catch (e) {
     // Handle errors
     debugPrint('Failed to handle request v1: $e');
-    if (context.mounted) {
-      showAlertDialog1(context, e.toString());
-    }
+    showBasicGetxDialog(e.toString());
+    
   }
 }
 
