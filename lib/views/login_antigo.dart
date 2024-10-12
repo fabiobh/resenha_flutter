@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_resenha/components/my_alert_dialog.dart';
-import 'package:flutter_resenha/components/my_network_manager.dart';
+import 'package:flutter_resenha/components/simple_alert_dialog.dart';
+import 'package:flutter_resenha/components/network_manager.dart';
 import 'package:flutter_resenha/model/minha_pessoa.dart';
 import 'package:flutter_resenha/views/menu_principal.dart';
 

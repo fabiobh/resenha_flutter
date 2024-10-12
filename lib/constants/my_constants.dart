@@ -5,7 +5,10 @@ class MyStrings {
   static const cadastrarNovaResenha = "Cadastrar Nova Resenha";
   static const verResenhasCadastradas = "Ver Resenhas Cadastradas";
   static const importarResenha = "Importar Resenha";
-  static const login = "Login";  
+  static const login = "Login";
+  static const usuarioCpf = "usuarioCpf";
+  static const usuarioSenha = "usuarioSenha";
+  static const usuarioToken = "usuarioToken";  
 }
 
 class MyColor {

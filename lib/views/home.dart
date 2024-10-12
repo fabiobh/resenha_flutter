@@ -1,8 +1,7 @@
 
-  import 'package:flutter/material.dart';
-import 'package:flutter_resenha/components/my_image_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_resenha/components/custom_image_button.dart';
 import 'package:flutter_resenha/views/login.dart';
-import 'package:get/get.dart';
 //import 'package:flutter_resenha/views/toogle_password.dart';
 //import 'package:get/get.dart';
 //import 'package:get/get_core/src/get_main.dart';

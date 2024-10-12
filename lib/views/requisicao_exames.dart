@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:flutter_resenha/model/album.dart';
-import 'package:flutter_resenha/components/my_alert_dialog.dart';
+import 'package:flutter_resenha/components/simple_alert_dialog.dart';
 
-import '../components/my_network_manager.dart';
+import '../components/network_manager.dart';
 import '../components/auth.dart';
 
 
@@ -174,7 +174,7 @@ class _MyWidgetState extends State<RequisicaoExamesWidget> {
                   debugPrint("consultar: $text");
                   //makePostRequestGedavePesquisaRequisicaoExame(text);
                   
-                  readRequisicaoExame(context, text); // 2024001928002702372700062046654
+                  readRequisicaoExame(text); // 2024001928002702372700062046654
                   debugPrint("getBasicAuthString(): ${getBasicAuthString()}");
                 },
               child: const MyConsultarText(),              
