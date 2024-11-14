@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import '../constants/my_constants.dart';
-import '../views/pesquisas.dart';
-import '../views/resenha_opcoes.dart';
-import '../views/requisicao_exames.dart';
 
 class MyImageButton extends StatelessWidget {
   
   final dynamic nomeBotao;
-  const MyImageButton({super.key, required this.nomeBotao});
+  final VoidCallback? onPressed; // Add this line
+
+  const MyImageButton({
+      super.key, 
+      required this.nomeBotao,
+      this.onPressed
+    });
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +29,26 @@ class MyImageButton extends StatelessWidget {
           )
         ),
         
+        // Replace the entire onPressed with this:
+        onPressed: onPressed ?? () {
+          debugPrint("botao clicado, mas sem ação disponivel v1");
+        },
+
+        /*
         onPressed: () {
           debugPrint("redirect to another widget view v0");
+          
           if (nomeBotao == MyStrings.pesquisa) {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PesquisasWidget()));
           } else if (nomeBotao == MyStrings.resenhaVirtualEquideos) {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ResenhaOpcoesView()));
-          } else if (nomeBotao == MyStrings.resenhaVirtualEquideos) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequisicaoExamesWidget()));            
+          
           } else {
             debugPrint("sem ação disponivel v1");
-          }          
+          }
+                   
         }, 
+        */
 
         child: SizedBox(
           height: 40,
