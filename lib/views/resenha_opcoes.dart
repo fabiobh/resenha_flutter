@@ -12,7 +12,7 @@ class ResenhaOpcoesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Resenhas1'),
+        title: const Text('Resenhas3'),
         backgroundColor: Colors.yellow,
       ),
       body: Center(

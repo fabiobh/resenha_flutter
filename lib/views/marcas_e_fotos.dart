@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'marcas_animal.dart';
+
 class MarcasFotos extends StatelessWidget {
   const MarcasFotos({super.key});
 
@@ -48,13 +50,21 @@ class MarcasFotos extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      color: Colors.grey[700],
-                      padding: const EdgeInsets.all(16),
-                      child: const Text(
-                        'MARCAS',
-                        style: TextStyle(color: Colors.white),
-                        textAlign: TextAlign.center,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MarcasAnimal()),
+                        );
+                      },
+                      child: Container(
+                        color: Colors.grey[700],
+                        padding: const EdgeInsets.all(16),
+                        child: const Text(
+                          'MARCAS',
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),

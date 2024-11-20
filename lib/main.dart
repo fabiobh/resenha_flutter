@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Menu Principal'),
+      home: const MyHomePage(title: 'Menu Principal9'),
     );
   }
 }
@@ -78,13 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.yellow,
-        title: Text(widget.title),
-      ),
-      body: const MyHomeScreen(), // app views stats HERE
-        
+    /*
+    return Scaffold(      
+      body: const MyHomeScreen(), // app views stats HERE        
     );
+    */
+    return const MyHomeScreen();
   }
 }

@@ -13,7 +13,7 @@ class MenuPrincipalWidget extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Menu Principal'),
+        title: const Text('Menu Principal2'),
         backgroundColor: Colors.yellow,
       ),
       body: MenuPrincipalDetailsyWidget(nome: nome, cpf: cpf),          

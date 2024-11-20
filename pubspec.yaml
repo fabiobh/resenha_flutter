@@ -67,3 +67,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - _assets_/
+    - _assets_/icones/
+    - _assets_/icones_topo/
+    - _assets_/marcas/  
