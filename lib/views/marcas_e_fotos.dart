@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'marcas_animal.dart';
+import 'testar_separacao.dart';
+import 'testar_separacao_v2.dart';
 
 class MarcasFotos extends StatelessWidget {
   const MarcasFotos({super.key});
@@ -20,7 +22,10 @@ class MarcasFotos extends StatelessWidget {
           TextButton(
             child: const Text('Finalizar', style: TextStyle(color: Colors.black)),
             onPressed: () {
-              // TODO: Implement finalizar action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TestarSeparacaoV2()),
+              );
             },
           ),
         ],
@@ -70,13 +75,21 @@ class MarcasFotos extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   Expanded(
-                    child: Container(
-                      color: Colors.grey[700],
-                      padding: const EdgeInsets.all(16),
-                      child: const Text(
-                        'FOTOS',
-                        style: TextStyle(color: Colors.white),
-                        textAlign: TextAlign.center,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const TestarSeparacao()),
+                        );
+                      },
+                      child: Container(
+                        color: Colors.grey[700],
+                        padding: const EdgeInsets.all(16),
+                        child: const Text(
+                          'FOTOS',
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),
