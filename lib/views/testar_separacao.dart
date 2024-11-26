@@ -15,14 +15,14 @@ class TestarSeparacao extends StatelessWidget {
           Expanded(
             flex: 2, // 20% of the remaining space
             child: Container(
-              color: Colors.red, // Example color
-              child: const Center(child: Text('Widget 1')),
+              color: Colors.red,
+              child: const Center(child: Text('Use o Testar separação V2')),
             ),
           ),
           Expanded(
             flex: 6, // 60% of the remaining space
             child: Container(
-              color: Colors.green, // Example color
+              color: Colors.green,
               child: const FittedBox(
                 fit: BoxFit.contain,
                 child: Image(
@@ -34,8 +34,8 @@ class TestarSeparacao extends StatelessWidget {
           Expanded(
             flex: 2, // 20% of the remaining space
             child: Container(
-              color: Colors.blue, // Example color
-              child: const Center(child: Text('Widget 3')),
+              color: Colors.blue,
+              child: const Center(child: Text('É melhor que esse')),
             ),
           ),
         ],

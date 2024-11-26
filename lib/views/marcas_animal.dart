@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,13 +15,17 @@ class MarcasAnimal extends StatelessWidget {
 }
 
 class ParticularidadesScreen extends StatefulWidget {
+  const ParticularidadesScreen({super.key});
+
   @override
   _ParticularidadesScreenState createState() => _ParticularidadesScreenState();
 }
 
 class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
   bool _showDraggableImage = false;
-  Offset _imageOffset = Offset(50, 50);
+  //Offset _imageOffset = Offset(50, 50);
+  Offset _imageOffset = Offset(0, 0);
+  final GlobalKey _blueContainerKey = GlobalKey(); // Declare the key
 
   final List<String> items = [
     'Cabeça',
@@ -80,8 +86,8 @@ class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(
-            height: 100,
+          SizedBox(
+            height: 90,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: items.length,
@@ -113,37 +119,72 @@ class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
               },
             ),
           ),
-          Container(
-            //color: Colors.red,
-            child: Stack(
-              children: [
-                Center(
-                  child: Image.asset('_assets_/icones/focinho_cavalo.png'),
-                ),
-                if (_showDraggableImage)
-                  Positioned(
-                    left: _imageOffset.dx,
-                    top: _imageOffset.dy,
-                    child: Draggable(
-                      feedback: Image.asset('_assets_/marcas/ic_res_mar_estrela_losango.png'),
-                      childWhenDragging: Container(),
-                      onDragEnd: (details) {
-                        setState(() {
-                          _imageOffset = details.offset;
-                        });
-                      },
-                      child: Image.asset('_assets_/marcas/ic_res_mar_estrela_losango.png'),
-                    ),
+          Expanded(
+            child: Container(
+              key: _blueContainerKey,  // Add a key to the blue container
+              color: Colors.blue,
+              child: Stack(
+                children: [                
+                  Center(                  
+                    //child: Image.asset('_assets_/icones/focinho_cavalo.png'),
+                    child: Image.asset('_assets_/icones/frente_cabeca_cavalo.png'),                  
                   ),
-              ],
+                  if (_showDraggableImage)
+                    Positioned(
+                      left: _imageOffset.dx,
+                      top: _imageOffset.dy,
+                      child: Draggable(
+                        feedback: Image.asset('_assets_/marcas/ic_res_mar_estrela_losango.png'),
+                        childWhenDragging: Container(),
+                        onDragEnd: (details) {
+                          setState(() {
+                            final RenderBox renderBox = _blueContainerKey.currentContext!.findRenderObject() as RenderBox;
+                            _imageOffset = renderBox.globalToLocal(details.offset);
+                          });
+                        },
+                        child: Image.asset('_assets_/marcas/ic_res_mar_estrela_losango.png'),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
-          Container(
+          SizedBox(
+            height: 40,
+            child: Container(
+              color: Colors.green,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () => _showAlert(context, 'ic_girar_esquerda.png'),
+                    child: Image.asset('_assets_/marcas/ic_girar_esquerda.png'),
+                  ),
+                  SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () => _showAlert(context, 'ic_girar_direita.png'),
+                    child: Image.asset('_assets_/marcas/ic_girar_direita.png'),
+                  ),
+                  SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () => _showAlert(context, 'ic_desfazer.png'),
+                    child: Image.asset('_assets_/marcas/ic_desfazer.png'),
+                  ),
+                  SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () => _showAlert(context, 'ic_desfazer.png'),
+                    child: Image.asset('_assets_/marcas/ic_delete.png'),
+                  ),
+                ],
+              )
+              ),
+          ),
+          SizedBox(
             height: 100,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                _buildButton(Text('bt1'), () => _showAlert(context, 'vai la')),
+                _buildButton(Text('bt0'), () => _showAlert(context, 'vai la')),
                 _buildButton(Text('bt2'), () {
                   setState(() {
                     _showDraggableImage = true;
