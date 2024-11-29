@@ -1,5 +1,22 @@
 import 'package:sqflite/sqflite.dart';
+/*
+class DbHelper {
+  static final DbHelper _instance = DbHelper._internal();
 
+  DbHelper._internal() {
+    createTables(); // Chama o método createTables no construtor
+  }
+
+  factory DbHelper() {
+    return _instance;
+  }
+
+  void createTables() {
+    // Lógica para criar tabelas no banco de dados
+    print("Tabelas criadas.");
+  }
+}
+*/
 class DatabaseHelper {
   
   static final _databaseName = "MyDatabase.db";
