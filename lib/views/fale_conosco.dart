@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_resenha/components/custom_drawer.dart';
 
 class FaleConoscoView extends StatelessWidget {
   const FaleConoscoView({Key? key}) : super(key: key);
@@ -10,13 +11,16 @@ class FaleConoscoView extends StatelessWidget {
         title: const Text('Fale Conosco'),
         backgroundColor: Colors.yellow,
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
         ),
       ),
+      drawer: CustomDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

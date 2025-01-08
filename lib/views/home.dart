@@ -17,6 +17,7 @@ import '../views/resenha_opcoes.dart';
 //import '../views/requisicao_exames.dart';
 import 'cadastro1.dart';
 //import '../views/cadastro1.dart';
+import 'package:flutter_resenha/components/custom_drawer.dart';
 
 class MyHomeScreen extends StatelessWidget {
   const MyHomeScreen({super.key});
@@ -37,65 +38,7 @@ class MyHomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.yellow,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Menu Principal'),
-              onTap: () {
-                // Navegar para a tela principal
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.contact_mail),
-              title: Text('Fale conosco'),
-              onTap: () {
-                Navigator.pop(context);
-                Get.to(() => FaleConoscoView());
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.thumb_up),
-              title: Text('Avaliar o App'),
-              onTap: () {
-                // Navegar para a tela de avaliação
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text('Sobre'),
-              onTap: () {
-                // Navegar para a tela sobre
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Sair'),
-              onTap: () {
-                // Implementar ação de sair
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(),
       body: Center(
         child: Column(
           children: [
