@@ -50,7 +50,7 @@ class _LoginViewFullState extends State<LoginViewFull> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Image.asset("_assets_/resenha_2.png", 
+            Image.asset("assets/resenha_2.png", 
               height: 200, 
               width: 150,
               fit: BoxFit.contain,

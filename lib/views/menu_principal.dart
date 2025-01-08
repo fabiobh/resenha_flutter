@@ -33,7 +33,7 @@ class MenuPrincipalDetailsyWidget extends StatelessWidget {
     return 
       Center(
           child: Column(children: [
-            Image.asset("_assets_/resenha_2.png", 
+            Image.asset("assets/resenha_2.png", 
               height: 200, 
               width: 150,
               fit: BoxFit.contain,

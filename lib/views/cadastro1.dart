@@ -108,32 +108,21 @@ class _ResenhaCadastro1State extends State<ResenhaCadastro1> {
                     child: Column(
                       children: [
                         const Text('Equinos'),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(4),
+                        TextFormField(
+                          initialValue: '$equinos',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: () {
-                                  if (equinos > 0) {
-                                    setState(() => equinos--);
-                                  }
-                                },
-                              ),
-                              Text('$equinos'),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  setState(() => equinos++);
-                                },
-                              ),
-                            ],
-                          ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            // Atualiza o número de equinos com base na entrada do usuário
+                            final int? newValue = int.tryParse(value);
+                            if (newValue != null) {
+                              setState(() {
+                                equinos = newValue;
+                              });
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -143,32 +132,21 @@ class _ResenhaCadastro1State extends State<ResenhaCadastro1> {
                     child: Column(
                       children: [
                         const Text('Asininos'),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(4),
+                        TextFormField(
+                          initialValue: '$asininos',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: () {
-                                  if (asininos > 0) {
-                                    setState(() => asininos--);
-                                  }
-                                },
-                              ),
-                              Text('$asininos'),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  setState(() => asininos++);
-                                },
-                              ),
-                            ],
-                          ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            // Atualiza o número de asininos com base na entrada do usuário
+                            final int? newValue = int.tryParse(value);
+                            if (newValue != null) {
+                              setState(() {
+                                asininos = newValue;
+                              });
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -178,32 +156,21 @@ class _ResenhaCadastro1State extends State<ResenhaCadastro1> {
                     child: Column(
                       children: [
                         const Text('Muares'),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(4),
+                        TextFormField(
+                          initialValue: '$muares',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: () {
-                                  if (muares > 0) {
-                                    setState(() => muares--);
-                                  }
-                                },
-                              ),
-                              Text('$muares'),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  setState(() => muares++);
-                                },
-                              ),
-                            ],
-                          ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            // Atualiza o número de muares com base na entrada do usuário
+                            final int? newValue = int.tryParse(value);
+                            if (newValue != null) {
+                              setState(() {
+                                muares = newValue;
+                              });
+                            }
+                          },
                         ),
                       ],
                     ),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_resenha/main.dart';
+import 'package:flutter_resenha/views/sobre.dart';
 import 'package:get/get.dart';
 import '../views/fale_conosco.dart';
 
 class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,6 +30,7 @@ class CustomDrawer extends StatelessWidget {
             title: Text('Menu Principal'),
             onTap: () {
               Navigator.pop(context);
+              Get.offAll(() => MyHomePage(title: 'Principal'));
             },
           ),
           ListTile(
@@ -33,7 +38,7 @@ class CustomDrawer extends StatelessWidget {
             title: Text('Fale conosco'),
             onTap: () {
               Navigator.pop(context);
-              Get.to(() => FaleConoscoView());
+              Get.offAll(() => FaleConoscoView());
             },
           ),
           ListTile(
@@ -48,6 +53,7 @@ class CustomDrawer extends StatelessWidget {
             title: Text('Sobre'),
             onTap: () {
               Navigator.pop(context);
+              Get.offAll(() => SobreView());
             },
           ),
           ListTile(

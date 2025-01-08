@@ -97,7 +97,7 @@ class HorseImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset("_assets_/resenha_2.png", 
+    return Image.asset("assets/resenha_2.png", 
               height: 200, 
               width: 150,
               fit: BoxFit.contain,

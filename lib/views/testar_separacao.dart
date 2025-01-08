@@ -26,7 +26,7 @@ class TestarSeparacao extends StatelessWidget {
               child: const FittedBox(
                 fit: BoxFit.contain,
                 child: Image(
-                  image: AssetImage('_assets_/icones/frente_cabeca_cavalo.png'), // Substitua pelo caminho da sua imagem
+                  image: AssetImage('assets/icones/frente_cabeca_cavalo.png'), // Substitua pelo caminho da sua imagem
                 ),
               ),
             ),

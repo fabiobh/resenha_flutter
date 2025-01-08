@@ -97,19 +97,19 @@ class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
                   child: SizedBox(
                     width: 80,
                     child: index == 0
-                          ? Image.asset('_assets_/icones_topo/ic_cabeca_normal.png')
+                          ? Image.asset('assets/icones_topo/ic_cabeca_normal.png')
                           : index == 1
-                          ? Image.asset('_assets_/icones_topo/ic_focinho_normal.png')
+                          ? Image.asset('assets/icones_topo/ic_focinho_normal.png')
                           : index == 2
-                          ? Image.asset('_assets_/icones_topo/ic_pescoco_normal.png')
+                          ? Image.asset('assets/icones_topo/ic_pescoco_normal.png')
                           : index == 3
-                          ? Image.asset('_assets_/icones_topo/ic_lateral_dir_normal.png')
+                          ? Image.asset('assets/icones_topo/ic_lateral_dir_normal.png')
                           : index == 4
-                          ? Image.asset('_assets_/icones_topo/ic_lateral_esq_normal.png')
+                          ? Image.asset('assets/icones_topo/ic_lateral_esq_normal.png')
                           : index == 5
-                          ? Image.asset('_assets_/icones_topo/ic_membros_ant_normal.png')
+                          ? Image.asset('assets_/icones_topo/ic_membros_ant_normal.png')
                           : index == 6
-                          ? Image.asset('_assets_/icones_topo/ic_membros_pos_normal.png')                          
+                          ? Image.asset('assets/icones_topo/ic_membros_pos_normal.png')                          
                           : Text(
                               items[index],
                               textAlign: TextAlign.center,
@@ -126,15 +126,14 @@ class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
               child: Stack(
                 children: [                
                   Center(                  
-                    //child: Image.asset('_assets_/icones/focinho_cavalo.png'),
-                    child: Image.asset('_assets_/icones/frente_cabeca_cavalo.png'),                  
+                    child: Image.asset('assets/icones/frente_cabeca_cavalo.png'),                  
                   ),
                   if (_showDraggableImage)
                     Positioned(
                       left: _imageOffset.dx,
                       top: _imageOffset.dy,
                       child: Draggable(
-                        feedback: Image.asset('_assets_/marcas/ic_res_mar_estrela_losango.png'),
+                        feedback: Image.asset('assets/marcas/ic_res_mar_estrela_losango.png'),
                         childWhenDragging: Container(),
                         onDragEnd: (details) {
                           setState(() {
@@ -142,7 +141,7 @@ class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
                             _imageOffset = renderBox.globalToLocal(details.offset);
                           });
                         },
-                        child: Image.asset('_assets_/marcas/ic_res_mar_estrela_losango.png'),
+                        child: Image.asset('assets/marcas/ic_res_mar_estrela_losango.png'),
                       ),
                     ),
                 ],
@@ -158,22 +157,22 @@ class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
                 children: [
                   GestureDetector(
                     onTap: () => _showAlert(context, 'ic_girar_esquerda.png'),
-                    child: Image.asset('_assets_/marcas/ic_girar_esquerda.png'),
+                    child: Image.asset('assets/marcas/ic_girar_esquerda.png'),
                   ),
                   SizedBox(width: 10),
                   GestureDetector(
                     onTap: () => _showAlert(context, 'ic_girar_direita.png'),
-                    child: Image.asset('_assets_/marcas/ic_girar_direita.png'),
+                    child: Image.asset('assets/marcas/ic_girar_direita.png'),
                   ),
                   SizedBox(width: 10),
                   GestureDetector(
                     onTap: () => _showAlert(context, 'ic_desfazer.png'),
-                    child: Image.asset('_assets_/marcas/ic_desfazer.png'),
+                    child: Image.asset('assets/marcas/ic_desfazer.png'),
                   ),
                   SizedBox(width: 10),
                   GestureDetector(
                     onTap: () => _showAlert(context, 'ic_desfazer.png'),
-                    child: Image.asset('_assets_/marcas/ic_delete.png'),
+                    child: Image.asset('assets/marcas/ic_delete.png'),
                   ),
                 ],
               )
@@ -190,7 +189,7 @@ class _ParticularidadesScreenState extends State<ParticularidadesScreen> {
                     _showDraggableImage = true;
                   });
                 }),
-                _buildButton(Image.asset('_assets_/marcas/ic_res_estrela_losango.png'), () {}),
+                _buildButton(Image.asset('assets/marcas/ic_res_estrela_losango.png'), () {}),
                 _buildButton(Text('bt4'), () => _showAlert(context, 'vaivai')),
                 _buildButton(Text('bt5'), () {}),
               ],
