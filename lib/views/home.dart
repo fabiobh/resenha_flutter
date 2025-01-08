@@ -7,13 +7,15 @@ import 'package:flutter_resenha/views/login.dart';
 //import 'package:get/get.dart';
 //import 'package:get/get_core/src/get_main.dart';
 //import 'package:get/instance_manager.dart';
+import 'package:flutter_resenha/views/cadastro1.dart';
+import 'package:flutter_resenha/views/fale_conosco.dart';
 
 import '../constants/my_constants.dart';
 
 import '../views/pesquisas.dart';
 import '../views/resenha_opcoes.dart';
 //import '../views/requisicao_exames.dart';
-
+import 'cadastro1.dart';
 //import '../views/cadastro1.dart';
 
 class MyHomeScreen extends StatelessWidget {
@@ -63,8 +65,8 @@ class MyHomeScreen extends StatelessWidget {
               leading: Icon(Icons.contact_mail),
               title: Text('Fale conosco'),
               onTap: () {
-                // Navegar para a tela de contato
                 Navigator.pop(context);
+                Get.to(() => FaleConoscoView());
               },
             ),
             ListTile(
