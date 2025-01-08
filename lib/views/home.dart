@@ -55,13 +55,13 @@ class MyHomeScreen extends StatelessWidget {
                 fontSize: 28.0,
               ),
             ),
-
+/*
             const SizedBox(height: 20),
             MyImageButton(
               nomeBotao: "Login9",
               onPressed: () => Get.to(() => LoginViewGetxFull()),            
             ),
-
+*/
             const SizedBox(height: 20),
             MyImageButton(
               nomeBotao: MyStrings.resenhaVirtualEquideos,
