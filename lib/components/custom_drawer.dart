@@ -60,11 +60,39 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Sair'),
             onTap: () {
-              Navigator.pop(context);
+
+              _showExitDialog(context);
             },
           ),
         ],
       ),
     );
   }
-} 
+
+
+  void _showExitDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Deseja realmente sair do sistema?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Não"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo
+              },
+            ),
+            TextButton(
+              child: Text("Sim"),
+              onPressed: () {
+                // Adicione a lógica para sair do sistema aqui
+                Navigator.of(context).pop(); // Fecha o diálogo
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
